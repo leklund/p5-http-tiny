@@ -204,6 +204,7 @@ sub request {
 
     if (my $e = "$@") {
         $response = {
+            url     => $url,
             success => q{},
             status  => 599,
             reason  => 'Internal Exception',
@@ -269,6 +270,7 @@ sub _request {
 
     $handle->close;
     $response->{success} = substr($response->{status},0,1) eq '2';
+    $response->{url} = $url;
     return $response;
 }
 
